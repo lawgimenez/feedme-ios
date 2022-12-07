@@ -21,6 +21,7 @@ struct HomeView: View {
                     EntryRowView(entry: entry)
                 }
             }
+            .listStyle(.plain)
         }.task {
             if arrayUnreadEntries.isEmpty {
                 await getUnreadEntries()
