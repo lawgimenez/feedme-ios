@@ -19,7 +19,9 @@ struct MainView: View {
     
     var body: some View {
         if status == .success || UserDefaults.standard.bool(forKey: Keys.Auth.isSignedIn) {
-            HomeView()
+            NavigationView {
+                HomeView()
+            }
         } else {
             SignInView()
         }

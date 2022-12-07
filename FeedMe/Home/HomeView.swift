@@ -15,11 +15,17 @@ struct HomeView: View {
     var body: some View {
         VStack {
             List(arrayUnreadEntries) { entry in
-                EntryRowView(entry: entry)
+                NavigationLink {
+                    EntryContentView()
+                } label: {
+                    EntryRowView(entry: entry)
+                }
             }
         }.task {
             await getUnreadEntries()
         }
+        .navigationTitle("Home")
+        .navigationBarTitleDisplayMode(.large)
     }
     
     private func getUnreadEntries() async {
