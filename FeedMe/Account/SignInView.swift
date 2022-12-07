@@ -15,34 +15,38 @@ struct SignInView: View {
     @State private var password: String = ""
     
     var body: some View {
-        VStack {
-            TextField("Email Address", text: $email)
-                .frame(width: 300)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
-            SecureField("Password", text: $password)
-                .frame(width: 300)
-                .disableAutocorrection(true)
-                .padding(.bottom)
-            Button(action: signIn) {
-                if isSigningIn {
-                    ProgressView()
-                        .background(Color.clear)
-                        .frame(width: 200)
-                        .tint(Color.white)
-                } else {
-                    Text("Sign In")
-                        .foregroundColor(.white)
-                        .frame(width: 200)
-                        .padding(5)
+        if signInSuccess {
+            HomeView()
+        } else {
+            VStack {
+                TextField("Email Address", text: $email)
+                    .frame(width: 300)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                SecureField("Password", text: $password)
+                    .frame(width: 300)
+                    .disableAutocorrection(true)
+                    .padding(.bottom)
+                Button(action: signIn) {
+                    if isSigningIn {
+                        ProgressView()
+                            .background(Color.clear)
+                            .frame(width: 200)
+                            .tint(Color.white)
+                    } else {
+                        Text("Sign In")
+                            .foregroundColor(.white)
+                            .frame(width: 200)
+                            .padding(5)
+                    }
                 }
+                .frame(width: 200, height: 45)
+                .background(.green)
+                .cornerRadius(10)
+                Spacer()
             }
-            .frame(width: 200, height: 45)
-            .background(.green)
-            .cornerRadius(10)
-            Spacer()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     private func signIn() {
@@ -64,6 +68,7 @@ struct SignInView: View {
                         if statusResponse.statusCode == 200 {
                             print("Sign in success")
                             UserDefaults.standard.set(true, forKey: Keys.Auth.isSignedIn)
+                            signInSuccess = true
                         }
                     }
                 }
