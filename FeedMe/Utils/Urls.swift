@@ -14,5 +14,6 @@ class Urls {
     
     public enum Api {
         static let auth = "\(baseURL)/\(version)/authentication.json"
+        static let taggings = "\(baseURL)/\(version)/taggings.json"
     }
 }
