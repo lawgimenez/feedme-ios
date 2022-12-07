@@ -10,14 +10,37 @@ import SwiftUI
 struct EntryContentView: View {
     
     var entry: Entry
+    @State private var fullContent = ""
     
     var body: some View {
-        let _ = print(entry.extractedURL)
-        if let content = entry.content {
-            ScrollView {
-                Text(content.html2String)
+        ScrollView {
+            if !fullContent.isEmpty {
+                Text(fullContent.html2String)
                     .padding(10)
             }
+        }
+        .task {
+            await getDataFromExtractedUrl()
+        }
+    }
+    
+    private func getDataFromExtractedUrl() async {
+        if let url = URL(string: entry.extractedURL) {
+            let session = URLSession.shared
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            let task = session.dataTask(with: request) { data, _, _ in
+                if let data = data {
+                    do {
+                        let content = try JSONDecoder().decode(Content.self, from: data)
+                        print("Content = \(content)")
+                        fullContent = content.content
+                    } catch {
+                        print("HomeView.error = \(error)")
+                    }
+                }
+            }
+            task.resume()
         }
     }
 }
