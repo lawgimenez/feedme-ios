@@ -63,6 +63,7 @@ struct SignInView: View {
                         let statusResponse = response as! HTTPURLResponse
                         if statusResponse.statusCode == 200 {
                             print("Sign in success")
+                            UserDefaults.standard.set(true, forKey: Keys.Auth.isSignedIn)
                         }
                     }
                 }

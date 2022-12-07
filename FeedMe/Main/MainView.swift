@@ -18,7 +18,7 @@ struct MainView: View {
     @State private var status: Status = .loggedOut
     
     var body: some View {
-        if status == .success {
+        if status == .success || UserDefaults.standard.bool(forKey: Keys.Auth.isSignedIn) {
             HomeView()
         } else {
             SignInView()
