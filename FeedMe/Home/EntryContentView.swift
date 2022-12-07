@@ -16,6 +16,7 @@ struct EntryContentView: View {
         if let content = entry.content {
             ScrollView {
                 Text(content.html2String)
+                    .padding(10)
             }
         }
     }
