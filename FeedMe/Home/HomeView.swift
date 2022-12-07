@@ -16,7 +16,7 @@ struct HomeView: View {
         VStack {
             List(arrayUnreadEntries) { entry in
                 NavigationLink {
-                    EntryContentView()
+                    EntryContentView(entry: entry)
                 } label: {
                     EntryRowView(entry: entry)
                 }

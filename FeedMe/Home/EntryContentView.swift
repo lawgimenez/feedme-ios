@@ -9,13 +9,12 @@ import SwiftUI
 
 struct EntryContentView: View {
     
+    var entry: Entry
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct EntryContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        EntryContentView()
+        let _ = print(entry.extractedURL)
+        if let content = entry.content {
+            Text(content)
+        }
     }
 }
