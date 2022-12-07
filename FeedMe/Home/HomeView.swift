@@ -22,7 +22,9 @@ struct HomeView: View {
                 }
             }
         }.task {
-            await getUnreadEntries()
+            if arrayUnreadEntries.isEmpty {
+                await getUnreadEntries()
+            }
         }
         .navigationTitle("Home")
         .navigationBarTitleDisplayMode(.large)
