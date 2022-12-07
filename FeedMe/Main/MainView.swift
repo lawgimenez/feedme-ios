@@ -15,6 +15,7 @@ enum Status {
 
 struct MainView: View {
     
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var status: Status = .loggedOut
     
     var body: some View {
@@ -22,6 +23,7 @@ struct MainView: View {
             NavigationView {
                 HomeView()
             }
+            .tint(colorScheme == .dark ? .white : .black)
         } else {
             SignInView()
         }
