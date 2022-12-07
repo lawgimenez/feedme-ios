@@ -68,6 +68,8 @@ struct SignInView: View {
                         if statusResponse.statusCode == 200 {
                             print("Sign in success")
                             UserDefaults.standard.set(true, forKey: Keys.Auth.isSignedIn)
+                            UserDefaults.standard.set(email, forKey: Keys.Auth.email)
+                            UserDefaults.standard.set(password, forKey: Keys.Auth.password)
                             signInSuccess = true
                         }
                     }

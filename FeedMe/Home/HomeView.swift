@@ -16,16 +16,19 @@ struct HomeView: View {
             List(arrayTaggings) { tag in
                 Text(tag.name)
             }
-        }.task {
-            await getTaggings()
+        }
+        .onAppear {
+            getTaggings()
         }
     }
     
-    private func getTaggings() async {
+    private func getTaggings() {
         if let url = URL(string: Urls.Api.taggings) {
+            let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
             let session = URLSession.shared
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
+            request.setValue("Basic \(userValue!)", forHTTPHeaderField: "Authorization")
             let task = session.dataTask(with: request) { data, _, _ in
                 if let data = data {
                     do {

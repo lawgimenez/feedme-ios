@@ -11,5 +11,7 @@ class Keys {
     
     public enum Auth {
         static let isSignedIn = "isSignedIn"
+        static let email = "email"
+        static let password = "password"
     }
 }
