@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SignInView: View {
     
+    @State private var signInSuccess = false
+    @State private var isSigningIn = false
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -22,8 +24,32 @@ struct SignInView: View {
                 .frame(width: 300)
                 .disableAutocorrection(true)
                 .padding(.bottom)
+            Button(action: signIn) {
+                if isSigningIn {
+                    ProgressView()
+                        .background(Color.clear)
+                        .frame(width: 200)
+                        .tint(Color.white)
+                } else {
+                    Text("Sign In")
+                        .foregroundColor(.white)
+                        .frame(width: 200)
+                        .padding(5)
+                }
+            }
+            .frame(width: 200, height: 45)
+            .background(.green)
+            .cornerRadius(10)
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    private func signIn() {
+        if !email.isEmpty && !password.isEmpty {
+            isSigningIn = true
+            
+        }
     }
 }
 
