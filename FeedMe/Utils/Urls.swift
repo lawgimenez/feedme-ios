@@ -17,5 +17,6 @@ class Urls {
         static let taggings = "\(baseURL)/\(version)/taggings.json"
         static let unread = "\(baseURL)/\(version)/unread_entries.json"
         static let entries = "\(baseURL)/\(version)/entries.json"
+        static let unreadEntries = "\(baseURL)/\(version)/entries.json?read=false"
     }
 }
