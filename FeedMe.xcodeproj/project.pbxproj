@@ -19,6 +19,7 @@
 		8A90E35E29408588008245E4 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E35D29408588008245E4 /* SignInView.swift */; };
 		8A90E36229408625008245E4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E36129408625008245E4 /* MainView.swift */; };
 		8A90E3652940867E008245E4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E3642940867E008245E4 /* HomeView.swift */; };
+		8A90E368294088B1008245E4 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E367294088B1008245E4 /* Urls.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		8A90E35D29408588008245E4 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		8A90E36129408625008245E4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8A90E3642940867E008245E4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8A90E367294088B1008245E4 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		8A90E32B29408512008245E4 /* FeedMe */ = {
 			isa = PBXGroup;
 			children = (
+				8A90E366294088A0008245E4 /* Utils */,
 				8A90E36329408674008245E4 /* Home */,
 				8A90E35F294085AA008245E4 /* Main */,
 				8A90E35C2940857A008245E4 /* Account */,
@@ -166,6 +169,14 @@
 				8A90E3642940867E008245E4 /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8A90E366294088A0008245E4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8A90E367294088B1008245E4 /* Urls.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 				8A90E32D29408512008245E4 /* FeedMeApp.swift in Sources */,
 				8A90E3652940867E008245E4 /* HomeView.swift in Sources */,
 				8A90E36229408625008245E4 /* MainView.swift in Sources */,
+				8A90E368294088B1008245E4 /* Urls.swift in Sources */,
 				8A90E32F29408512008245E4 /* Persistence.swift in Sources */,
 				8A90E33429408512008245E4 /* ContentView.swift in Sources */,
 				8A90E33229408512008245E4 /* FeedMe.xcdatamodeld in Sources */,

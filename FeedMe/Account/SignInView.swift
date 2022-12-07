@@ -47,8 +47,27 @@ struct SignInView: View {
     
     private func signIn() {
         if !email.isEmpty && !password.isEmpty {
+            print(String(format: "%@:%@", email, password))
             isSigningIn = true
-            
+            if let url = URL(string: Urls.Api.auth) {
+                let userValue = String(format: "%@:%@", email, password).data(using: .utf8)?.base64EncodedString()
+                let session = URLSession.shared
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                request.setValue("Basic \(userValue!)", forHTTPHeaderField: "Authorization")
+                let task = session.dataTask(with: request) { _, response, error in
+                    isSigningIn = false
+                    if let error = error {
+                        print("Sign In error = \(error)")
+                    } else {
+                        let statusResponse = response as! HTTPURLResponse
+                        if statusResponse.statusCode == 200 {
+                            print("Sign in success")
+                        }
+                    }
+                }
+                task.resume()
+            }
         }
     }
 }
