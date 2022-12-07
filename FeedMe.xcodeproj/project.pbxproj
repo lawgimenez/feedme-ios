@@ -17,6 +17,8 @@
 		8A90E34E29408514008245E4 /* FeedMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E34D29408514008245E4 /* FeedMeUITests.swift */; };
 		8A90E35029408514008245E4 /* FeedMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E34F29408514008245E4 /* FeedMeUITestsLaunchTests.swift */; };
 		8A90E35E29408588008245E4 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E35D29408588008245E4 /* SignInView.swift */; };
+		8A90E36229408625008245E4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E36129408625008245E4 /* MainView.swift */; };
+		8A90E3652940867E008245E4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E3642940867E008245E4 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		8A90E34D29408514008245E4 /* FeedMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMeUITests.swift; sourceTree = "<group>"; };
 		8A90E34F29408514008245E4 /* FeedMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8A90E35D29408588008245E4 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		8A90E36129408625008245E4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8A90E3642940867E008245E4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 		8A90E32B29408512008245E4 /* FeedMe */ = {
 			isa = PBXGroup;
 			children = (
+				8A90E36329408674008245E4 /* Home */,
 				8A90E35F294085AA008245E4 /* Main */,
 				8A90E35C2940857A008245E4 /* Account */,
 				8A90E32C29408512008245E4 /* FeedMeApp.swift */,
@@ -150,8 +155,17 @@
 		8A90E35F294085AA008245E4 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8A90E36129408625008245E4 /* MainView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		8A90E36329408674008245E4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8A90E3642940867E008245E4 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +299,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A90E32D29408512008245E4 /* FeedMeApp.swift in Sources */,
+				8A90E3652940867E008245E4 /* HomeView.swift in Sources */,
+				8A90E36229408625008245E4 /* MainView.swift in Sources */,
 				8A90E32F29408512008245E4 /* Persistence.swift in Sources */,
 				8A90E33429408512008245E4 /* ContentView.swift in Sources */,
 				8A90E33229408512008245E4 /* FeedMe.xcdatamodeld in Sources */,
