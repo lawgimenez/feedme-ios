@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         VStack {
             List(arrayUnreadEntries) { entry in
-                Text(entry.summary)
+                EntryRowView(entry: entry)
             }
         }.task {
             await getUnreadEntries()
