@@ -26,6 +26,10 @@ struct HomeView: View {
                 .tabItem {
                     Label("Starred", systemImage: "star.fill")
                 }
+            TagsView()
+                .tabItem {
+                    Label("Tags", systemImage: "tag.fill")
+                }
         }
         .navigationTitle(selectedTab.rawValue.capitalized)
     }
