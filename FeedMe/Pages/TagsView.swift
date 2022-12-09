@@ -10,10 +10,13 @@ import SwiftUI
 struct TagsView: View {
     
     @State private var arrayTaggings = [Tag]()
+    @State private var arrayTags = [Tag]()
     
     var body: some View {
         VStack {
-            Text("Hello, World!")
+            List(arrayTags) { tag in
+                Text(tag.name)
+            }
         }
         .task {
             await getTaggings()
@@ -33,7 +36,15 @@ struct TagsView: View {
                     do {
                         let arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
                         print("Array tags = \(arrayTaggings)")
-                        self.arrayTaggings = arrayTaggings
+                        for tagging in arrayTaggings {
+                            if arrayTags.contains(where: {
+                                $0.name == tagging.name
+                            }) {
+                            } else {
+                                // Not found
+                                arrayTags.append(tagging)
+                            }
+                        }
                     } catch {
                         print("HomeView.error = \(error)")
                     }
