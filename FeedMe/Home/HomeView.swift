@@ -12,6 +12,7 @@ struct HomeView: View {
     enum Pages: String {
         case unread
         case starred
+        case tag
     }
     
     @State private var selectedTab: Pages = .unread
@@ -22,14 +23,17 @@ struct HomeView: View {
                 .tabItem {
                     Label("Unread", systemImage: "list.bullet.circle.fill")
                 }
+                .tag(Pages.unread)
             StarredView()
                 .tabItem {
                     Label("Starred", systemImage: "star.fill")
                 }
+                .tag(Pages.starred)
             TagsView()
                 .tabItem {
                     Label("Tags", systemImage: "tag.fill")
                 }
+                .tag(Pages.tag)
         }
         .navigationTitle(selectedTab.rawValue.capitalized)
     }

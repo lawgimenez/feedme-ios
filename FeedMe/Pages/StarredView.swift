@@ -26,7 +26,7 @@ struct StarredView: View {
                 await getStarredEntries()
             }
         }
-        .navigationTitle("Unread")
+        .navigationTitle("Starred")
         .navigationBarTitleDisplayMode(.large)
     }
     
