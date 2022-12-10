@@ -21,7 +21,9 @@ struct TagsView: View {
 //                    if let listOfFeedIds = subsOversable.dictTagsList[tag.name] {
 //                        let _ = print("subs filtered = \(subsOversable.getSubsFromList(listOfFeedIds: listOfFeedIds))")
 //                    }
-                    TagFeedView(tagName: tag.name, subsObservable: subsObservable).environmentObject(feedsObservable)
+                    TagFeedView(tagName: tag.name)
+                        .environmentObject(feedsObservable)
+                        .environmentObject(subsObservable)
                 } label: {
                     HStack {
                         Text(tag.name)

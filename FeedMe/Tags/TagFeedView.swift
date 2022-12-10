@@ -10,7 +10,7 @@ import SwiftUI
 struct TagFeedView: View {
     
     var tagName: String
-    var subsObservable: SubsObservable
+    @EnvironmentObject private var subsObservable: SubsObservable
     @EnvironmentObject private var feedsObservable: FeedsObservable
     
     var body: some View {
