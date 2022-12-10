@@ -15,10 +15,14 @@ struct TagsView: View {
     var body: some View {
         VStack {
             List(arrayTags) { tag in
-                HStack {
-                    Text(tag.name)
-                    if let count = dictTagsList[tag.name]?.count {
-                        Text(String(count))
+                NavigationLink {
+                    TagSubsView()
+                } label: {
+                    HStack {
+                        Text(tag.name)
+                        if let count = dictTagsList[tag.name]?.count {
+                            Text(String(count))
+                        }
                     }
                 }
             }
