@@ -10,15 +10,16 @@ import SwiftUI
 struct TagFeedView: View {
     
     var tagName: String
+    var subsOversable: SubsObservable
     
     var body: some View {
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct TagFeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        TagFeedView(tagName: "Blogs")
+        if let arrayFeedIds = subsOversable.dictTagsList[tagName] {
+            let arraySubs = subsOversable.getSubsFromList(arrayFeedIds: arrayFeedIds)
+            let _ = print("Array subs = \(arraySubs)")
+            List(arraySubs) { sub in
+                Text(sub.title)
+            }
+            .navigationTitle(tagName)
+        }
     }
 }

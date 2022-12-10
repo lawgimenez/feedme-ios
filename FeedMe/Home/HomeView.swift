@@ -14,7 +14,7 @@ struct HomeView: View {
     enum Pages: String {
         case unread
         case starred
-        case tag
+        case tags
         case subscriptions
     }
     
@@ -36,7 +36,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("Tags", systemImage: "tag.fill")
                 }
-                .tag(Pages.tag)
+                .tag(Pages.tags)
             SubsView()
                 .tabItem {
                     Label("Subscriptions", systemImage: "pencil.circle.fill")

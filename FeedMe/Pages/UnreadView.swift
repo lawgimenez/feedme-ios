@@ -30,6 +30,7 @@ struct UnreadView: View {
         }
         .navigationTitle("Unread")
         .navigationBarTitleDisplayMode(.large)
+        .environmentObject(feedsObservable)
     }
     
     private func getUnreadEntries() async {

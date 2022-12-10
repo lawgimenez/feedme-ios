@@ -9,18 +9,22 @@ import SwiftUI
 
 struct TagsView: View {
     
+    @EnvironmentObject private var subsOversable: SubsObservable
     @State private var arrayTags = [Tag]()
-    @State private var dictTagsList = [String: [Int]]()
     
     var body: some View {
         VStack {
             List(arrayTags) { tag in
                 NavigationLink {
-                    TagFeedView(tagName: tag.name)
+                    // Get lists inside dictionary
+//                    if let listOfFeedIds = subsOversable.dictTagsList[tag.name] {
+//                        let _ = print("subs filtered = \(subsOversable.getSubsFromList(listOfFeedIds: listOfFeedIds))")
+//                    }
+                    TagFeedView(tagName: tag.name, subsOversable: subsOversable)
                 } label: {
                     HStack {
                         Text(tag.name)
-                        if let count = dictTagsList[tag.name]?.count {
+                        if let count = subsOversable.dictTagsList[tag.name]?.count {
                             Text(String(count))
                         }
                     }
@@ -28,7 +32,7 @@ struct TagsView: View {
             }
         }
         .task {
-            if dictTagsList.isEmpty {
+            if subsOversable.dictTagsList.isEmpty {
                 await getTags()
             }
         }
@@ -45,7 +49,10 @@ struct TagsView: View {
             let task = session.dataTask(with: request) { data, _, _ in
                 if let data = data {
                     do {
-                        self.arrayTags = try JSONDecoder().decode([Tag].self, from: data)
+                        let arrayTags = try JSONDecoder().decode([Tag].self, from: data)
+                        DispatchQueue.main.async {
+                            self.arrayTags = arrayTags
+                        }
                         getTaggings()
 //                        print("Array dicts = \(dictTags)")
                     } catch {
@@ -73,22 +80,21 @@ struct TagsView: View {
                         let arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
                         for tagging in arrayTaggings {
                             // Add feed ID to list
-                            let arrayFeedIDs = dictTagsList[tagging.name]
+                            let arrayFeedIDs = subsOversable.dictTagsList[tagging.name]
                             if arrayFeedIDs == nil {
                                 if let feedID = tagging.feedID {
-                                    dictTagsList[tagging.name] = [feedID]
+                                    subsOversable.dictTagsList[tagging.name] = [feedID]
                                 }
                             } else {
                                 // If dictionary key is not empty
                                 // Get List
-                                var list = dictTagsList[tagging.name]
+                                var list = subsOversable.dictTagsList[tagging.name]
                                 if let feedID = tagging.feedID {
                                     list?.append(feedID)
-                                    dictTagsList[tagging.name] = list
+                                    subsOversable.dictTagsList[tagging.name] = list
                                 }
                             }
                         } // end of for loop
-                        print(dictTagsList)
 //                        let arrayKeys: [String] = dictTagsList.map({ $0.key })
                     } catch {
                         print("TagsView.error = \(error)")
