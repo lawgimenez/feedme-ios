@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UnreadView: View {
     
-    @StateObject var feedsObservable = FeedsObservable()
+    @EnvironmentObject private var feedsObservable: FeedsObservable
     private var arrayTaggings = [Tag]()
     private var dictFeedSort = [String: [Int]]()
     
@@ -30,7 +30,6 @@ struct UnreadView: View {
         }
         .navigationTitle("Unread")
         .navigationBarTitleDisplayMode(.large)
-        .environmentObject(feedsObservable)
     }
     
     private func getUnreadEntries() async {
@@ -44,6 +43,7 @@ struct UnreadView: View {
                 if let data = data {
                     do {
                         let arrayUnreadEntries = try JSONDecoder().decode([Entry].self, from: data)
+                        print("Unread = \(arrayUnreadEntries.count)")
                         DispatchQueue.main.async {
                             feedsObservable.arrayUnreadEntries = arrayUnreadEntries
                         }

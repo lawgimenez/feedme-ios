@@ -10,6 +10,7 @@ import SwiftUI
 struct TagsView: View {
     
     @EnvironmentObject private var subsOversable: SubsObservable
+    @EnvironmentObject private var feedsObservable: FeedsObservable
     @State private var arrayTags = [Tag]()
     
     var body: some View {
@@ -20,7 +21,7 @@ struct TagsView: View {
 //                    if let listOfFeedIds = subsOversable.dictTagsList[tag.name] {
 //                        let _ = print("subs filtered = \(subsOversable.getSubsFromList(listOfFeedIds: listOfFeedIds))")
 //                    }
-                    TagFeedView(tagName: tag.name, subsOversable: subsOversable)
+                    TagFeedView(tagName: tag.name, subsOversable: subsOversable).environmentObject(feedsObservable)
                 } label: {
                     HStack {
                         Text(tag.name)

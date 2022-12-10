@@ -11,13 +11,17 @@ struct TagFeedView: View {
     
     var tagName: String
     var subsOversable: SubsObservable
+    @EnvironmentObject private var feedsObservable: FeedsObservable
     
     var body: some View {
         if let arrayFeedIds = subsOversable.dictTagsList[tagName] {
             let arraySubs = subsOversable.getSubsFromList(arrayFeedIds: arrayFeedIds)
-            let _ = print("Array subs = \(arraySubs)")
             List(arraySubs) { sub in
-                Text(sub.title)
+                NavigationLink {
+                    UnreadFromTagView(feedID: sub.feedID).environmentObject(feedsObservable)
+                } label: {
+                    Text(sub.title)
+                }
             }
             .navigationTitle(tagName)
         }

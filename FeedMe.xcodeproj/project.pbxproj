@@ -31,6 +31,7 @@
 		8ACB78BA2944A45F000575B8 /* SubsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78B92944A45F000575B8 /* SubsObservable.swift */; };
 		8ACB78BF2944A6A1000575B8 /* TagFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78BE2944A6A1000575B8 /* TagFeedView.swift */; };
 		8ACB78C12944A84A000575B8 /* FeedsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78C02944A84A000575B8 /* FeedsObservable.swift */; };
+		8ACB78C32944BDC9000575B8 /* UnreadFromTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78C22944BDC8000575B8 /* UnreadFromTagView.swift */; };
 		8AD9EF4F29431DFE0011976C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9EF4E29431DFE0011976C /* HomeView.swift */; };
 		8AD9EF5229432BB80011976C /* StarredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9EF5129432BB80011976C /* StarredView.swift */; };
 		8AD9EF5429432F7B0011976C /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9EF5329432F7B0011976C /* TagsView.swift */; };
@@ -82,6 +83,7 @@
 		8ACB78B92944A45F000575B8 /* SubsObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsObservable.swift; sourceTree = "<group>"; };
 		8ACB78BE2944A6A1000575B8 /* TagFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFeedView.swift; sourceTree = "<group>"; };
 		8ACB78C02944A84A000575B8 /* FeedsObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsObservable.swift; sourceTree = "<group>"; };
+		8ACB78C22944BDC8000575B8 /* UnreadFromTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadFromTagView.swift; sourceTree = "<group>"; };
 		8AD9EF4E29431DFE0011976C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8AD9EF5129432BB80011976C /* StarredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarredView.swift; sourceTree = "<group>"; };
 		8AD9EF5329432F7B0011976C /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				8ACB78BE2944A6A1000575B8 /* TagFeedView.swift */,
+				8ACB78C22944BDC8000575B8 /* UnreadFromTagView.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				8A90E3652940867E008245E4 /* UnreadView.swift in Sources */,
 				8ACB78C12944A84A000575B8 /* FeedsObservable.swift in Sources */,
 				8AA25B0F2940A2D2005768A3 /* EntryRowView.swift in Sources */,
+				8ACB78C32944BDC9000575B8 /* UnreadFromTagView.swift in Sources */,
 				8AD9EF4F29431DFE0011976C /* HomeView.swift in Sources */,
 				8AA25B0B2940945F005768A3 /* Tag.swift in Sources */,
 				8ACB78BA2944A45F000575B8 /* SubsObservable.swift in Sources */,

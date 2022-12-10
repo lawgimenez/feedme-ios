@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var subsOversable = SubsObservable()
+    @StateObject var feedsObservable = FeedsObservable()
     
     enum Pages: String {
         case unread
@@ -48,6 +49,7 @@ struct HomeView: View {
         }
         .navigationTitle(selectedTab.rawValue.capitalized)
         .environmentObject(subsOversable)
+        .environmentObject(feedsObservable)
     }
     
     private func getSubs() async {
