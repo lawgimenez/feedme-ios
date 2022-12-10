@@ -18,7 +18,7 @@ struct TagFeedView: View {
             let arraySubs = subsObservable.getSubsFromList(arrayFeedIds: arrayFeedIds)
             List(arraySubs) { sub in
                 NavigationLink {
-                    UnreadFromTagView(feedID: sub.feedID).environmentObject(feedsObservable)
+                    UnreadFromTagView(feedID: sub.feedID, subTitle: sub.title).environmentObject(feedsObservable)
                 } label: {
                     Text(sub.title)
                 }

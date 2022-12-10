@@ -11,6 +11,7 @@ struct UnreadFromTagView: View {
     
     @EnvironmentObject var feedsOversable: FeedsObservable
     var feedID: Int
+    var subTitle: String
     
     var body: some View {
         VStack {
@@ -25,6 +26,7 @@ struct UnreadFromTagView: View {
             }
             .listStyle(.plain)
         }
+        .navigationTitle(subTitle)
     }
 }
 
