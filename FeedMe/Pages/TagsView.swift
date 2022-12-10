@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TagsView: View {
     
-    @EnvironmentObject private var subsOversable: SubsObservable
+    @EnvironmentObject private var subsObservable: SubsObservable
     @EnvironmentObject private var feedsObservable: FeedsObservable
     @State private var arrayTags = [Tag]()
     
@@ -21,11 +21,11 @@ struct TagsView: View {
 //                    if let listOfFeedIds = subsOversable.dictTagsList[tag.name] {
 //                        let _ = print("subs filtered = \(subsOversable.getSubsFromList(listOfFeedIds: listOfFeedIds))")
 //                    }
-                    TagFeedView(tagName: tag.name, subsOversable: subsOversable).environmentObject(feedsObservable)
+                    TagFeedView(tagName: tag.name, subsObservable: subsObservable).environmentObject(feedsObservable)
                 } label: {
                     HStack {
                         Text(tag.name)
-                        if let count = subsOversable.dictTagsList[tag.name]?.count {
+                        if let count = subsObservable.dictTagsList[tag.name]?.count {
                             Text(String(count))
                         }
                     }
@@ -33,7 +33,7 @@ struct TagsView: View {
             }
         }
         .task {
-            if subsOversable.dictTagsList.isEmpty {
+            if subsObservable.dictTagsList.isEmpty {
                 await getTags()
             }
         }
@@ -81,18 +81,18 @@ struct TagsView: View {
                         let arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
                         for tagging in arrayTaggings {
                             // Add feed ID to list
-                            let arrayFeedIDs = subsOversable.dictTagsList[tagging.name]
+                            let arrayFeedIDs = subsObservable.dictTagsList[tagging.name]
                             if arrayFeedIDs == nil {
                                 if let feedID = tagging.feedID {
-                                    subsOversable.dictTagsList[tagging.name] = [feedID]
+                                    subsObservable.dictTagsList[tagging.name] = [feedID]
                                 }
                             } else {
                                 // If dictionary key is not empty
                                 // Get List
-                                var list = subsOversable.dictTagsList[tagging.name]
+                                var list = subsObservable.dictTagsList[tagging.name]
                                 if let feedID = tagging.feedID {
                                     list?.append(feedID)
-                                    subsOversable.dictTagsList[tagging.name] = list
+                                    subsObservable.dictTagsList[tagging.name] = list
                                 }
                             }
                         } // end of for loop

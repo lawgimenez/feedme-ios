@@ -10,12 +10,12 @@ import SwiftUI
 struct TagFeedView: View {
     
     var tagName: String
-    var subsOversable: SubsObservable
+    var subsObservable: SubsObservable
     @EnvironmentObject private var feedsObservable: FeedsObservable
     
     var body: some View {
-        if let arrayFeedIds = subsOversable.dictTagsList[tagName] {
-            let arraySubs = subsOversable.getSubsFromList(arrayFeedIds: arrayFeedIds)
+        if let arrayFeedIds = subsObservable.dictTagsList[tagName] {
+            let arraySubs = subsObservable.getSubsFromList(arrayFeedIds: arrayFeedIds)
             List(arraySubs) { sub in
                 NavigationLink {
                     UnreadFromTagView(feedID: sub.feedID).environmentObject(feedsObservable)

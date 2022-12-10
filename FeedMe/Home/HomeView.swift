@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var subsOversable = SubsObservable()
+    @StateObject var subsObservable = SubsObservable()
     @StateObject var feedsObservable = FeedsObservable()
     
     enum Pages: String {
@@ -48,7 +48,7 @@ struct HomeView: View {
             await getSubs()
         }
         .navigationTitle(selectedTab.rawValue.capitalized)
-        .environmentObject(subsOversable)
+        .environmentObject(subsObservable)
         .environmentObject(feedsObservable)
     }
     
@@ -67,8 +67,8 @@ struct HomeView: View {
 //                        }
                         let arraySubs = try JSONDecoder().decode([Sub].self, from: data)
                         DispatchQueue.main.async {
-                            subsOversable.arraySubs = arraySubs
-                            print("Subs count = \(subsOversable.arraySubs.count)")
+                            subsObservable.arraySubs = arraySubs
+                            print("Subs count = \(subsObservable.arraySubs.count)")
                         }
                     } catch {
                         print("SubsView.error = \(error)")

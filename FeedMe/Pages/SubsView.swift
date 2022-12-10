@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SubsView: View {
     
-    @EnvironmentObject private var subsOversable: SubsObservable
+    @EnvironmentObject private var subsObservable: SubsObservable
     
     var body: some View {
         VStack {
-            let _ = print("SubsView count = \(subsOversable.arraySubs.count)")
-            List(subsOversable.arraySubs) { sub in
+            let _ = print("SubsView count = \(subsObservable.arraySubs.count)")
+            List(subsObservable.arraySubs) { sub in
                 Text(sub.title)
             }
         }
