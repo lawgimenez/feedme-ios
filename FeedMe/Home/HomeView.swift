@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @StateObject var subsOversable = SubsObservable()
+    
     enum Pages: String {
         case unread
         case starred
@@ -41,7 +43,38 @@ struct HomeView: View {
                 }
                 .tag(Pages.subscriptions)
         }
+        .task {
+            await getSubs()
+        }
         .navigationTitle(selectedTab.rawValue.capitalized)
+        .environmentObject(subsOversable)
+    }
+    
+    private func getSubs() async {
+        if let url = URL(string: Urls.Api.subsriptions) {
+            let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
+            let session = URLSession.shared
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("Basic \(userValue!)", forHTTPHeaderField: "Authorization")
+            let task = session.dataTask(with: request) { data, _, _ in
+                if let data = data {
+                    do {
+//                        if let dataString = String(bytes: data, encoding: .utf8) {
+//                            print("Subs = \(dataString)")
+//                        }
+                        let arraySubs = try JSONDecoder().decode([Sub].self, from: data)
+                        DispatchQueue.main.async {
+                            subsOversable.arraySubs = arraySubs
+                            print("Subs count = \(subsOversable.arraySubs.count)")
+                        }
+                    } catch {
+                        print("SubsView.error = \(error)")
+                    }
+                }
+            }
+            task.resume()
+        }
     }
 }
 

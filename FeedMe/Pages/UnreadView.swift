@@ -43,7 +43,9 @@ struct UnreadView: View {
                 if let data = data {
                     do {
                         let arrayUnreadEntries = try JSONDecoder().decode([Entry].self, from: data)
-                        feedsObservable.arrayUnreadEntries = arrayUnreadEntries
+                        DispatchQueue.main.async {
+                            feedsObservable.arrayUnreadEntries = arrayUnreadEntries
+                        }
                     } catch {
                         print("HomeView.error = \(error)")
                     }
