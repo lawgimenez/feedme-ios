@@ -12,8 +12,8 @@ struct Entry: Decodable, Identifiable {
     var id: Int
     var feedID: Int
     var title: String?
-    var url: String
-    var extractedURL: String
+    var url: String?
+    var extractedURL: String?
     var author: String?
     var content: String?
     var summary: String

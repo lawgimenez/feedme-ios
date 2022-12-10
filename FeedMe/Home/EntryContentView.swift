@@ -25,22 +25,24 @@ struct EntryContentView: View {
     }
     
     private func getDataFromExtractedUrl() async {
-        if let url = URL(string: entry.extractedURL) {
-            let session = URLSession.shared
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            let task = session.dataTask(with: request) { data, _, _ in
-                if let data = data {
-                    do {
-                        let content = try JSONDecoder().decode(Content.self, from: data)
-                        print("Content = \(content)")
-                        fullContent = content.content
-                    } catch {
-                        print("HomeView.error = \(error)")
+        if let extractedURL = entry.extractedURL {
+            if let url = URL(string: extractedURL) {
+                let session = URLSession.shared
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                let task = session.dataTask(with: request) { data, _, _ in
+                    if let data = data {
+                        do {
+                            let content = try JSONDecoder().decode(Content.self, from: data)
+                            print("Content = \(content)")
+                            fullContent = content.content
+                        } catch {
+                            print("HomeView.error = \(error)")
+                        }
                     }
                 }
+                task.resume()
             }
-            task.resume()
         }
     }
 }
