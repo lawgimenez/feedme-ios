@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TagsView: View {
     
-    @State private var arrayTaggings = [Tag]()
     @State private var arrayTags = [Tag]()
     
     var body: some View {
@@ -19,13 +18,13 @@ struct TagsView: View {
             }
         }
         .task {
-            await getTaggings()
+            await getTags()
         }
         .navigationTitle("Tags")
     }
     
-    private func getTaggings() async {
-        if let url = URL(string: Urls.Api.taggings) {
+    private func getTags() async {
+        if let url = URL(string: Urls.Api.tags) {
             let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
             let session = URLSession.shared
             var request = URLRequest(url: url)
@@ -34,19 +33,10 @@ struct TagsView: View {
             let task = session.dataTask(with: request) { data, _, _ in
                 if let data = data {
                     do {
-                        let arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
-                        print("Array tags = \(arrayTaggings)")
-                        for tagging in arrayTaggings {
-                            if arrayTags.contains(where: {
-                                $0.name == tagging.name
-                            }) {
-                            } else {
-                                // Not found
-                                arrayTags.append(tagging)
-                            }
-                        }
+                        self.arrayTags = try JSONDecoder().decode([Tag].self, from: data)
+                        print("Array tags = \(arrayTags)")
                     } catch {
-                        print("HomeView.error = \(error)")
+                        print("TagsView.error = \(error)")
                     }
                 }
             }

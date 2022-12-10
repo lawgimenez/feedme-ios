@@ -19,5 +19,6 @@ class Urls {
         static let entries = "\(baseURL)/\(version)/entries.json"
         static let unreadEntries = "\(baseURL)/\(version)/entries.json?read=false"
         static let starredEntries = "\(baseURL)/\(version)/entries.json?starred=true"
+        static let tags = "\(baseURL)/\(version)/tags.json"
     }
 }
