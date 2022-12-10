@@ -13,6 +13,7 @@ struct HomeView: View {
         case unread
         case starred
         case tag
+        case subscriptions
     }
     
     @State private var selectedTab: Pages = .unread
@@ -34,6 +35,11 @@ struct HomeView: View {
                     Label("Tags", systemImage: "tag.fill")
                 }
                 .tag(Pages.tag)
+            SubsView()
+                .tabItem {
+                    Label("Subscriptions", systemImage: "pencil.circle.fill")
+                }
+                .tag(Pages.subscriptions)
         }
         .navigationTitle(selectedTab.rawValue.capitalized)
     }
