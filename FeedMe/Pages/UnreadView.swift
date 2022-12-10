@@ -9,13 +9,13 @@ import SwiftUI
 
 struct UnreadView: View {
     
-    @State private var arrayUnreadEntries = [Entry]()
+    @StateObject var feedsObservable = FeedsObservable()
     private var arrayTaggings = [Tag]()
     private var dictFeedSort = [String: [Int]]()
     
     var body: some View {
         VStack {
-            List(arrayUnreadEntries) { entry in
+            List(feedsObservable.arrayUnreadEntries) { entry in
                 NavigationLink {
                     EntryContentView(entry: entry)
                 } label: {
@@ -24,7 +24,7 @@ struct UnreadView: View {
             }
             .listStyle(.plain)
         }.task {
-            if arrayUnreadEntries.isEmpty {
+            if feedsObservable.arrayUnreadEntries.isEmpty {
                 await getUnreadEntries()
             }
         }
@@ -43,7 +43,7 @@ struct UnreadView: View {
                 if let data = data {
                     do {
                         let arrayUnreadEntries = try JSONDecoder().decode([Entry].self, from: data)
-                        self.arrayUnreadEntries = arrayUnreadEntries
+                        feedsObservable.arrayUnreadEntries = arrayUnreadEntries
                     } catch {
                         print("HomeView.error = \(error)")
                     }

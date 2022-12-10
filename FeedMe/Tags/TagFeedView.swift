@@ -7,15 +7,18 @@
 
 import SwiftUI
 
-struct TagSubsView: View {
+struct TagFeedView: View {
+    
+    var tagName: String
     
     var body: some View {
+        
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct TagSubsView_Previews: PreviewProvider {
+struct TagFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        TagSubsView()
+        TagFeedView(tagName: "Blogs")
     }
 }

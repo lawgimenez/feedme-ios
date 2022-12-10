@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SubsObservables: ObservableObject {
+class SubsObservable: ObservableObject {
     
     @Published var arraySubs = [Sub]()
 }

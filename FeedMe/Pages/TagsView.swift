@@ -16,7 +16,7 @@ struct TagsView: View {
         VStack {
             List(arrayTags) { tag in
                 NavigationLink {
-                    TagSubsView()
+                    TagFeedView(tagName: tag.name)
                 } label: {
                     HStack {
                         Text(tag.name)

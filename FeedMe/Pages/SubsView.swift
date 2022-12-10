@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SubsView: View {
     
-    @StateObject var subsOversable = SubsObservables()
+    @StateObject var subsOversable = SubsObservable()
 //    @State private var arraySubs = [Sub]()
     
     var body: some View {
