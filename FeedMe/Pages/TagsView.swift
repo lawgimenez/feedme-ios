@@ -28,7 +28,9 @@ struct TagsView: View {
             }
         }
         .task {
-            await getTags()
+            if dictTagsList.isEmpty {
+                await getTags()
+            }
         }
         .navigationTitle("Tags")
     }
