@@ -10,7 +10,6 @@ import SwiftUI
 struct TagsView: View {
     
     @State private var arrayTags = [Tag]()
-    @State private var arrayTaggings = [Tag]()
     @State private var dictTagsList = [String: [Int]]()
     
     var body: some View {
@@ -65,7 +64,7 @@ struct TagsView: View {
 //                        if let dataString = String(bytes: data, encoding: .utf8) {
 //                            print("Taggings = \(dataString)")
 //                        }
-                        self.arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
+                        let arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
                         for tagging in arrayTaggings {
                             // Add feed ID to list
                             let arrayFeedIDs = dictTagsList[tagging.name]
