@@ -17,10 +17,6 @@ struct TagsView: View {
         VStack {
             List(arrayTags) { tag in
                 NavigationLink {
-                    // Get lists inside dictionary
-//                    if let listOfFeedIds = subsOversable.dictTagsList[tag.name] {
-//                        let _ = print("subs filtered = \(subsOversable.getSubsFromList(listOfFeedIds: listOfFeedIds))")
-//                    }
                     TagFeedView(tagName: tag.name)
                         .environmentObject(feedsObservable)
                         .environmentObject(subsObservable)
