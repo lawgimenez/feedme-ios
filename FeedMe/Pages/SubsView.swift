@@ -9,11 +9,12 @@ import SwiftUI
 
 struct SubsView: View {
     
-    @State private var arraySubs = [Sub]()
+    @StateObject var subsOversable = SubsObservables()
+//    @State private var arraySubs = [Sub]()
     
     var body: some View {
         VStack {
-            List(arraySubs) { sub in
+            List(subsOversable.arraySubs) { sub in
                 Text(sub.title)
             }
         }
@@ -35,7 +36,7 @@ struct SubsView: View {
                         if let dataString = String(bytes: data, encoding: .utf8) {
                             print("Subs = \(dataString)")
                         }
-                        self.arraySubs = try JSONDecoder().decode([Sub].self, from: data)
+                        subsOversable.arraySubs = try JSONDecoder().decode([Sub].self, from: data)
                     } catch {
                         print("SubsView.error = \(error)")
                     }
