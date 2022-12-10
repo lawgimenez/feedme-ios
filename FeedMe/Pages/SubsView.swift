@@ -32,8 +32,10 @@ struct SubsView: View {
             let task = session.dataTask(with: request) { data, _, _ in
                 if let data = data {
                     do {
+                        if let dataString = String(bytes: data, encoding: .utf8) {
+                            print("Subs = \(dataString)")
+                        }
                         self.arraySubs = try JSONDecoder().decode([Sub].self, from: data)
-                        print("Array Subs = \(arraySubs)")
                     } catch {
                         print("SubsView.error = \(error)")
                     }

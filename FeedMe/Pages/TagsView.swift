@@ -11,14 +11,14 @@ struct TagsView: View {
     
     @State private var arrayTags = [Tag]()
     @State private var arrayTaggings = [Tag]()
-    @State private var dictTags: [String: Int] = [:]
+    @State private var dictTagsList = [String: [Int]]()
     
     var body: some View {
         VStack {
             List(arrayTags) { tag in
                 HStack {
                     Text(tag.name)
-                    if let count = dictTags[tag.name] {
+                    if let count = dictTagsList[tag.name]?.count {
                         Text(String(count))
                     }
                 }
@@ -26,7 +26,6 @@ struct TagsView: View {
         }
         .task {
             await getTags()
-            await getTaggings()
         }
         .navigationTitle("Tags")
     }
@@ -42,10 +41,8 @@ struct TagsView: View {
                 if let data = data {
                     do {
                         self.arrayTags = try JSONDecoder().decode([Tag].self, from: data)
-                        for tag in arrayTags {
-                            dictTags[tag.name] = 0
-                        }
-                        print("Array dicts = \(dictTags)")
+                        getTaggings()
+//                        print("Array dicts = \(dictTags)")
                     } catch {
                         print("TagsView.error = \(error)")
                     }
@@ -55,7 +52,7 @@ struct TagsView: View {
         }
     }
     
-    private func getTaggings() async {
+    private func getTaggings() {
         if let url = URL(string: Urls.Api.taggings) {
             let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
             let session = URLSession.shared
@@ -65,12 +62,29 @@ struct TagsView: View {
             let task = session.dataTask(with: request) { data, _, _ in
                 if let data = data {
                     do {
+//                        if let dataString = String(bytes: data, encoding: .utf8) {
+//                            print("Taggings = \(dataString)")
+//                        }
                         self.arrayTaggings = try JSONDecoder().decode([Tag].self, from: data)
                         for tagging in arrayTaggings {
-                            let currentCount = dictTags[tagging.name]
-                            dictTags[tagging.name] = currentCount! + 1
-                        }
-                        print("Array taggings = \(arrayTaggings)")
+                            // Add feed ID to list
+                            let arrayFeedIDs = dictTagsList[tagging.name]
+                            if arrayFeedIDs == nil {
+                                if let feedID = tagging.feedID {
+                                    dictTagsList[tagging.name] = [feedID]
+                                }
+                            } else {
+                                // If dictionary key is not empty
+                                // Get List
+                                var list = dictTagsList[tagging.name]
+                                if let feedID = tagging.feedID {
+                                    list?.append(feedID)
+                                    dictTagsList[tagging.name] = list
+                                }
+                            }
+                        } // end of for loop
+                        print(dictTagsList)
+//                        let arrayKeys: [String] = dictTagsList.map({ $0.key })
                     } catch {
                         print("TagsView.error = \(error)")
                     }
