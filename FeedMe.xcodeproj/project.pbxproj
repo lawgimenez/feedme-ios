@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8A8AFB042944877700C4ADA8 /* SubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8AFB032944877700C4ADA8 /* SubsView.swift */; };
+		8A8AFB06294488A900C4ADA8 /* Sub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8AFB05294488A900C4ADA8 /* Sub.swift */; };
 		8A90E32D29408512008245E4 /* FeedMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E32C29408512008245E4 /* FeedMeApp.swift */; };
 		8A90E32F29408512008245E4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E32E29408512008245E4 /* Persistence.swift */; };
 		8A90E33229408512008245E4 /* FeedMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E33029408512008245E4 /* FeedMe.xcdatamodeld */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		8A8AFB032944877700C4ADA8 /* SubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsView.swift; sourceTree = "<group>"; };
+		8A8AFB05294488A900C4ADA8 /* Sub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sub.swift; sourceTree = "<group>"; };
 		8A90E32929408512008245E4 /* FeedMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A90E32C29408512008245E4 /* FeedMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMeApp.swift; sourceTree = "<group>"; };
 		8A90E32E29408512008245E4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				8AA25B0A2940945F005768A3 /* Tag.swift */,
 				8AA25B0C29409D17005768A3 /* Entry.swift */,
 				8AA25B122940C732005768A3 /* Content.swift */,
+				8A8AFB05294488A900C4ADA8 /* Sub.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				8AA25B132940C732005768A3 /* Content.swift in Sources */,
 				8A90E33229408512008245E4 /* FeedMe.xcdatamodeld in Sources */,
 				8AD9EF5229432BB80011976C /* StarredView.swift in Sources */,
+				8A8AFB06294488A900C4ADA8 /* Sub.swift in Sources */,
 				8AA25B0829409252005768A3 /* Keys.swift in Sources */,
 				8AA25B112940A573005768A3 /* EntryContentView.swift in Sources */,
 				8A90E35E29408588008245E4 /* SignInView.swift in Sources */,
