@@ -55,35 +55,40 @@ struct EntryContentView: View {
     }
     
     private func toggleRead() {
+        var httpMethod = "DELETE"
         if !isContentRead {
             // Mark this content as read
-            if let url = URL(string: Urls.Api.unread) {
-                let json = ["unread_entries": [entry.id]]
-                let jsonData = try? JSONSerialization.data(withJSONObject: json)
-                if let dataString = String(bytes: jsonData!, encoding: .utf8) {
-                    print("JsonData = \(dataString)")
-                }
-                let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
-                let session = URLSession.shared
-                var request = URLRequest(url: url)
-                request.httpMethod = "DELETE"
-                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-                request.setValue("Basic \(userValue!)", forHTTPHeaderField: "Authorization")
-                request.httpBody = jsonData
-                let task = session.dataTask(with: request) { _, response, error in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        let statusResponse = response as! HTTPURLResponse
-                        print("stat code \(statusResponse.statusCode)")
-                        if statusResponse.statusCode == 200 {
-                            print("Marked unread")
-                            isContentRead = true
-                        }
+            httpMethod = "DELETE"
+        } else {
+            // If mark as read is untrue
+            // Mark it as unread again
+            httpMethod = "POST"
+        }
+        if let url = URL(string: Urls.Api.unread) {
+            let json = ["unread_entries": [entry.id]]
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            if let dataString = String(bytes: jsonData!, encoding: .utf8) {
+                print("JsonData = \(dataString)")
+            }
+            let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
+            let session = URLSession.shared
+            var request = URLRequest(url: url)
+            request.httpMethod = httpMethod
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.setValue("Basic \(userValue!)", forHTTPHeaderField: "Authorization")
+            request.httpBody = jsonData
+            let task = session.dataTask(with: request) { _, response, error in
+                if let error = error {
+                    print(error)
+                } else {
+                    let statusResponse = response as! HTTPURLResponse
+                    print("stat code \(statusResponse.statusCode)")
+                    if statusResponse.statusCode == 200 {
+                        isContentRead.toggle()
                     }
                 }
-                task.resume()
             }
+            task.resume()
         }
     }
 }
