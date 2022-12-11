@@ -11,6 +11,7 @@ struct EntryContentView: View {
     
     var entry: Entry
     @State private var fullContent = ""
+    @State private var isContentRead = false
     
     var body: some View {
         ScrollView {
@@ -21,6 +22,13 @@ struct EntryContentView: View {
         }
         .task {
             await getDataFromExtractedUrl()
+        }
+        .toolbar {
+            Button(action: {
+                toggleRead()
+            }) {
+                Image(systemName: isContentRead == true ? "book.fill" : "book")
+            }
         }
     }
     
@@ -38,6 +46,39 @@ struct EntryContentView: View {
                             fullContent = content.content
                         } catch {
                             print("HomeView.error = \(error)")
+                        }
+                    }
+                }
+                task.resume()
+            }
+        }
+    }
+    
+    private func toggleRead() {
+        if !isContentRead {
+            // Mark this content as read
+            if let url = URL(string: Urls.Api.unread) {
+                let json = ["unread_entries": [entry.id]]
+                let jsonData = try? JSONSerialization.data(withJSONObject: json)
+                if let dataString = String(bytes: jsonData!, encoding: .utf8) {
+                    print("JsonData = \(dataString)")
+                }
+                let userValue = String(format: "%@:%@", UserDefaults.standard.string(forKey: Keys.Auth.email)!, UserDefaults.standard.string(forKey: Keys.Auth.password)!).data(using: .utf8)?.base64EncodedString()
+                let session = URLSession.shared
+                var request = URLRequest(url: url)
+                request.httpMethod = "DELETE"
+                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                request.setValue("Basic \(userValue!)", forHTTPHeaderField: "Authorization")
+                request.httpBody = jsonData
+                let task = session.dataTask(with: request) { _, response, error in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        let statusResponse = response as! HTTPURLResponse
+                        print("stat code \(statusResponse.statusCode)")
+                        if statusResponse.statusCode == 200 {
+                            print("Marked unread")
+                            isContentRead = true
                         }
                     }
                 }
