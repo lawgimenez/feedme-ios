@@ -91,6 +91,8 @@ struct EntryContentView: View {
                             isContentRead.toggle()
                             if isContentRead {
                                 entryIdRead = entry.id
+                            } else {
+                                entryIdRead = 0
                             }
                         }
                     }
