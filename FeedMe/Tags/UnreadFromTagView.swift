@@ -10,6 +10,7 @@ import SwiftUI
 struct UnreadFromTagView: View {
     
     @EnvironmentObject var feedsOversable: FeedsObservable
+    @State var entryIdRead = 0
     var feedID: Int
     var subTitle: String
     
@@ -19,7 +20,7 @@ struct UnreadFromTagView: View {
             let _ = print("UnreadFromTag unread = \(arrayUnreadEntries)")
             List(arrayUnreadEntries) { entry in
                 NavigationLink {
-                    EntryContentView(entry: entry)
+                    EntryContentView(entry: entry, entryIdRead: $entryIdRead)
                 } label: {
                     EntryRowView(entry: entry)
                 }

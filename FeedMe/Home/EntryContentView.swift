@@ -12,13 +12,12 @@ struct EntryContentView: View {
     var entry: Entry
     @State private var fullContent = ""
     @State private var isContentRead = false
+    @Binding var entryIdRead: Int
     
     var body: some View {
         ScrollView {
-            if !fullContent.isEmpty {
-                Text(fullContent.html2String)
-                    .padding(10)
-            }
+            Text(fullContent)
+                .padding(10)
         }
         .task {
             await getDataFromExtractedUrl()
@@ -45,7 +44,9 @@ struct EntryContentView: View {
                         do {
                             let content = try JSONDecoder().decode(Content.self, from: data)
                             print("Content = \(content)")
-                            fullContent = content.content
+                            DispatchQueue.main.async {
+                                fullContent = content.content.html2String
+                            }
                         } catch {
                             print("HomeView.error = \(error)")
                         }
@@ -88,6 +89,9 @@ struct EntryContentView: View {
                     if statusResponse.statusCode == 200 {
                         DispatchQueue.main.async {
                             isContentRead.toggle()
+                            if isContentRead {
+                                entryIdRead = entry.id
+                            }
                         }
                     }
                 }

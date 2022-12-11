@@ -10,6 +10,7 @@ import SwiftUI
 struct UnreadView: View {
     
     @EnvironmentObject private var feedsObservable: FeedsObservable
+    @State var entryIdRead = 0
     private var arrayTaggings = [Tag]()
     private var dictFeedSort = [String: [Int]]()
     
@@ -17,7 +18,7 @@ struct UnreadView: View {
         VStack {
             List(feedsObservable.arrayUnreadEntries) { entry in
                 NavigationLink {
-                    EntryContentView(entry: entry)
+                    EntryContentView(entry: entry, entryIdRead: $entryIdRead)
                 } label: {
                     EntryRowView(entry: entry)
                 }
@@ -27,6 +28,19 @@ struct UnreadView: View {
             if feedsObservable.arrayUnreadEntries.isEmpty {
                 await getUnreadEntries()
             }
+        }.onAppear {
+            let _ = print("FeedMe.app entryIdRead = \(entryIdRead)")
+            if entryIdRead != 0 {
+                let indexToBeRemoved = feedsObservable.arrayUnreadEntries.firstIndex(where: {
+                    $0.id == entryIdRead
+                })
+                if let indexToBeRemoved {
+                    feedsObservable.arrayUnreadEntries.remove(at: indexToBeRemoved)
+                }
+            }
+        }
+        .onDisappear {
+            entryIdRead = 0
         }
         .navigationTitle("Unread")
         .navigationBarTitleDisplayMode(.large)

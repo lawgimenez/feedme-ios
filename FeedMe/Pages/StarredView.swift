@@ -10,12 +10,13 @@ import SwiftUI
 struct StarredView: View {
     
     @State private var arrayUnreadEntries = [Entry]()
+    @State var entryIdRead = 0
     
     var body: some View {
         VStack {
             List(arrayUnreadEntries) { entry in
                 NavigationLink {
-                    EntryContentView(entry: entry)
+                    EntryContentView(entry: entry, entryIdRead: $entryIdRead)
                 } label: {
                     EntryRowView(entry: entry)
                 }
