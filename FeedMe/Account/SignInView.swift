@@ -9,14 +9,16 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @State private var signInSuccess = false
+//    @State private var signInSuccess = false
     @State private var isSigningIn = false
     @State private var email: String = ""
     @State private var password: String = ""
+    @EnvironmentObject private var authObservables: AuthObservables
     
     var body: some View {
-        if signInSuccess {
+        if authObservables.status == .success {
             HomeView()
+                .environmentObject(authObservables)
         } else {
             VStack {
                 TextField("Email Address", text: $email)
@@ -70,7 +72,8 @@ struct SignInView: View {
                             UserDefaults.standard.set(true, forKey: Keys.Auth.isSignedIn)
                             UserDefaults.standard.set(email, forKey: Keys.Auth.email)
                             UserDefaults.standard.set(password, forKey: Keys.Auth.password)
-                            signInSuccess = true
+//                            signInSuccess = true
+                            authObservables.status = .success
                         }
                     }
                 }

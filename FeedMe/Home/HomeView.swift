@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @StateObject var subsObservable = SubsObservable()
     @StateObject var feedsObservable = FeedsObservable()
+    @EnvironmentObject private var authObservables: AuthObservables
     
     enum Pages: String {
         case unread
@@ -49,6 +50,7 @@ struct HomeView: View {
                     Label("Settings", systemImage: "gear.circle.fill")
                 }
                 .tag(Pages.settings)
+                .environmentObject(authObservables)
         }
         .task {
             await getSubs()

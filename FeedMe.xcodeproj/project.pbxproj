@@ -33,6 +33,7 @@
 		8ACB78C12944A84A000575B8 /* FeedsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78C02944A84A000575B8 /* FeedsObservable.swift */; };
 		8ACB78C32944BDC9000575B8 /* UnreadFromTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78C22944BDC8000575B8 /* UnreadFromTagView.swift */; };
 		8ACB78C5294579D2000575B8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78C4294579D2000575B8 /* SettingsView.swift */; };
+		8ACB78C729457EF5000575B8 /* AuthObservables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB78C629457EF5000575B8 /* AuthObservables.swift */; };
 		8AD9EF4F29431DFE0011976C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9EF4E29431DFE0011976C /* HomeView.swift */; };
 		8AD9EF5229432BB80011976C /* StarredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9EF5129432BB80011976C /* StarredView.swift */; };
 		8AD9EF5429432F7B0011976C /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9EF5329432F7B0011976C /* TagsView.swift */; };
@@ -86,6 +87,7 @@
 		8ACB78C02944A84A000575B8 /* FeedsObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsObservable.swift; sourceTree = "<group>"; };
 		8ACB78C22944BDC8000575B8 /* UnreadFromTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadFromTagView.swift; sourceTree = "<group>"; };
 		8ACB78C4294579D2000575B8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8ACB78C629457EF5000575B8 /* AuthObservables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthObservables.swift; sourceTree = "<group>"; };
 		8AD9EF4E29431DFE0011976C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8AD9EF5129432BB80011976C /* StarredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarredView.swift; sourceTree = "<group>"; };
 		8AD9EF5329432F7B0011976C /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				8ACB78B92944A45F000575B8 /* SubsObservable.swift */,
 				8ACB78C02944A84A000575B8 /* FeedsObservable.swift */,
+				8ACB78C629457EF5000575B8 /* AuthObservables.swift */,
 			);
 			path = Observables;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				8A90E368294088B1008245E4 /* Urls.swift in Sources */,
 				8A90E32F29408512008245E4 /* Persistence.swift in Sources */,
 				8AA25B0D29409D17005768A3 /* Entry.swift in Sources */,
+				8ACB78C729457EF5000575B8 /* AuthObservables.swift in Sources */,
 				8A90E33429408512008245E4 /* ContentView.swift in Sources */,
 				8AA25B132940C732005768A3 /* Content.swift in Sources */,
 				8ACB78BF2944A6A1000575B8 /* TagFeedView.swift in Sources */,
