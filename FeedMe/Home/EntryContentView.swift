@@ -27,7 +27,8 @@ struct EntryContentView: View {
             Button(action: {
                 toggleRead()
             }) {
-                Image(systemName: isContentRead == true ? "book.fill" : "book")
+                let _ = print("isContentRead = \(isContentRead)")
+                Image(systemName: isContentRead == true ? "checkmark.circle.fill" : "checkmark.circle")
             }
         }
     }
@@ -84,7 +85,9 @@ struct EntryContentView: View {
                     let statusResponse = response as! HTTPURLResponse
                     print("stat code \(statusResponse.statusCode)")
                     if statusResponse.statusCode == 200 {
-                        isContentRead.toggle()
+                        DispatchQueue.main.async {
+                            isContentRead.toggle()
+                        }
                     }
                 }
             }
