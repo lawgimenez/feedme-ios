@@ -17,6 +17,7 @@ struct HomeView: View {
         case starred
         case tags
         case subscriptions
+        case settings
     }
     
     @State private var selectedTab: Pages = .unread
@@ -43,6 +44,11 @@ struct HomeView: View {
                     Label("Subscriptions", systemImage: "pencil.circle.fill")
                 }
                 .tag(Pages.subscriptions)
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear.circle.fill")
+                }
+                .tag(Pages.settings)
         }
         .task {
             await getSubs()
