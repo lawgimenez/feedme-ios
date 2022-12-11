@@ -31,6 +31,7 @@ struct EntryContentView: View {
                 Image(systemName: isContentRead == true ? "checkmark.circle.fill" : "checkmark.circle")
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func getDataFromExtractedUrl() async {
