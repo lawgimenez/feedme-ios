@@ -15,20 +15,25 @@ struct EntryContentView: View {
     @Binding var entryIdRead: Int
     
     var body: some View {
-        ScrollView {
-            Text(fullContent)
-                .padding(10)
+        NavigationStack {
+            ScrollView {
+                Text(fullContent)
+                    .padding(10)
+                    .toolbar {
+                        ToolbarItem(placement: .bottomBar) {
+                            Button(action: {
+                                toggleRead()
+                            }, label: {
+                                Label("Read", systemImage: isContentRead == true ? "checkmark.circle.fill" : "checkmark.circle")
+                            })
+                            .labelStyle(.automatic)
+                        }
+                    }
+            }
         }
+        .toolbar(.hidden, for: .navigationBar)
         .task {
             await getDataFromExtractedUrl()
-        }
-        .toolbar {
-            Button(action: {
-                toggleRead()
-            }) {
-                let _ = print("isContentRead = \(isContentRead)")
-                Image(systemName: isContentRead == true ? "checkmark.circle.fill" : "checkmark.circle")
-            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }
