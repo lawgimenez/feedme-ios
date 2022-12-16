@@ -13,6 +13,8 @@ struct EntryContentView: View {
     @State private var fullContent = ""
     @State private var isContentRead = false
     @Binding var entryIdRead: Int
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         VStack {
@@ -23,7 +25,6 @@ struct EntryContentView: View {
             Button(action: {
                 toggleRead()
             }) {
-                let _ = print("isContentRead = \(isContentRead)")
                 Image(systemName: isContentRead == true ? "checkmark.circle.fill" : "checkmark.circle")
                     .resizable()
                     .frame(width: 30, height: 30)
@@ -92,6 +93,7 @@ struct EntryContentView: View {
                         DispatchQueue.main.async {
                             isContentRead.toggle()
                             if isContentRead {
+                                presentationMode.wrappedValue.dismiss()
                                 entryIdRead = entry.id
                             } else {
                                 entryIdRead = 0
