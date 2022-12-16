@@ -9,14 +9,14 @@ import SwiftUI
 
 struct UnreadFromTagView: View {
     
-    @EnvironmentObject var feedsOversable: FeedsObservable
+    @EnvironmentObject private var feedsObservable: FeedsObservable
     @State var entryIdRead = 0
     var feedID: Int
     var subTitle: String
     
     var body: some View {
         VStack {
-            let arrayUnreadEntries = feedsOversable.getUnreadEntries(feedID: feedID)
+            let arrayUnreadEntries = feedsObservable.getUnreadEntries(feedID: feedID)
             let _ = print("UnreadFromTag unread = \(arrayUnreadEntries)")
             List(arrayUnreadEntries) { entry in
                 NavigationLink {
@@ -27,12 +27,20 @@ struct UnreadFromTagView: View {
             }
             .listStyle(.plain)
         }
+        .onAppear {
+            let _ = print("FeedMe.app UnreadFromTagView entryIdRead = \(entryIdRead)")
+            if entryIdRead != 0 {
+                let indexToBeRemoved = feedsObservable.arrayUnreadEntries.firstIndex(where: {
+                    $0.id == entryIdRead
+                })
+                if let indexToBeRemoved {
+                    feedsObservable.arrayUnreadEntries.remove(at: indexToBeRemoved)
+                }
+            }
+        }
+        .onDisappear {
+            entryIdRead = 0
+        }
         .navigationTitle(subTitle)
     }
 }
-
-//struct UnreadFromTagView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UnreadFromTagView()
-//    }
-//}
