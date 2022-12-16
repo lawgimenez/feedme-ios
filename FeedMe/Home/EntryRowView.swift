@@ -15,7 +15,7 @@ struct EntryRowView: View {
         VStack {
             if let title = entry.title {
                 Text(title)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14).bold())
                     .padding(.bottom, 8)
                     .multilineTextAlignment(.leading)
             }
