@@ -17,17 +17,17 @@ struct EntryRowView: View {
                 Text(title)
                     .font(.system(size: 14).bold())
                     .padding(.bottom, 8)
-                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             if let author = entry.author {
                 Text(author)
                     .font(.system(size: 12))
                     .padding(.bottom, 8)
-                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             Text(entry.summary)
                 .font(.system(size: 12))
-                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
