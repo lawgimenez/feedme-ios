@@ -25,10 +25,12 @@ struct SignInView: View {
                     .frame(width: 300)
                     .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
+                    .padding([.top], 100)
                 SecureField("Password", text: $password)
                     .frame(width: 300)
                     .disableAutocorrection(true)
                     .padding(.bottom)
+                    .padding([.top], 25)
                 Button(action: signIn) {
                     if isSigningIn {
                         ProgressView()
