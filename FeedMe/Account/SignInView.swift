@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SignInView: View {
     
-//    @State private var signInSuccess = false
     @State private var isSigningIn = false
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var isSignInFailed = false
     @EnvironmentObject private var authObservables: AuthObservables
     
     var body: some View {
@@ -54,6 +54,11 @@ struct SignInView: View {
             .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
+            .alert("Please check your credentials.", isPresented: $isSignInFailed) {
+                Button("OK") {
+                    isSignInFailed = false
+                }
+            }
         }
     }
     
@@ -70,16 +75,16 @@ struct SignInView: View {
                 let task = session.dataTask(with: request) { _, response, error in
                     isSigningIn = false
                     if let error = error {
-                        print("Sign In error = \(error)")
+                        isSignInFailed = true
                     } else {
                         let statusResponse = response as! HTTPURLResponse
                         if statusResponse.statusCode == 200 {
-                            print("Sign in success")
                             UserDefaults.standard.set(true, forKey: Keys.Auth.isSignedIn)
                             UserDefaults.standard.set(email, forKey: Keys.Auth.email)
                             UserDefaults.standard.set(password, forKey: Keys.Auth.password)
-//                            signInSuccess = true
                             authObservables.status = .success
+                        } else {
+                            isSignInFailed = true
                         }
                     }
                 }
